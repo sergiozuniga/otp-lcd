@@ -1,0 +1,51 @@
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+	<main>
+    	<div class="container">
+      		<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        		<div class="container">
+          			<div class="row justify-content-center">
+            			<div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+              				<div class="d-flex justify-content-center py-4">
+                  				<h2 class="d-none d-lg-block">Verificador de Identidad</h2>
+              				</div>
+              				<div class="card mb-3">
+                				<div class="card-body">
+                  					<div class="pt-4 pb-2">
+                    					<h5 class="card-title text-center pb-0 fs-4">Ingrese a su cuenta</h5>
+                  					</div>
+				  					<form th:action="@{/login}" method="POST" class="row g-3 needs-validation">                  
+                    					<div class="col-12">
+                        					<input type="email" th:placeholder="Email" id="user_name" name="user_name" class="form-control" required>
+                    					</div>
+                    					<div class="col-12">
+					  						<input type="password" th:placeholder="Password" id="password" name="password" class="form-control" required>                      
+                    					</div>
+                    					<div class="col-12">
+                      						<button class="btn btn-primary w-100" name="submit" type="submit"><i class="fa-solid fa-door-open"></i> Accesar Usuario</button>
+                    					</div>
+                    					<input type="hidden" id="errorMessage" th:if="${param.error != null}" value="Email y/o password inválidos">
+                  					</form>
+									<form th:action="@{/registration}" method="GET">
+                    					<div class="col-12">
+                      						<button class="btn btn-success w-100" name="submit" type="submit"><i class="fa-solid fa-user-plus"></i> Registrar Usuario</button>
+                    					</div>
+									</form>                  					
+                				</div>
+              				</div>
+            			</div>
+          			</div>
+        		</div>
+      		</section>
+    	</div>
+  	</main>
+  	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</body>
+<script type="text/javascript">
+const errorMessage = $("#errorMessage").val();
+if(errorMessage){
+	swal("Error", errorMessage, "error");
+}
+</script>
+</html>

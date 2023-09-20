@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+<div class="container">    
+	<div class="card">
+    	<div class="card-header bg-primary">
+           	<h3 class="text-center text-white" th:utext="${userName}"></h3>
+       	</div>
+       	<div class="card-body border-primary">
+			<div class="col-12">
+	        	<img th:src="${qrcode}" class="mx-auto d-block"/>
+			</div>
+			<div class="col-12">
+				<p class="text-center" th:text="${secret}"></p>
+			</div>
+		</div>
+		<div class="card-footer border-primary">
+			<form th:action="@{/admin/validation}" method="GET" class="row" style="height: 50px">
+				<div class="col-12">
+					<button class="btn btn-success w-100" name="validation" type="submit"><i class="fa-solid fa-check"></i> Validación Código OTP</button>
+				</div>
+			</form>
+			<form th:action="@{/admin/sendemail}" method="GET" class="row" style="height: 50px">
+				<div class="col-12">					
+					<button class="btn btn-primary w-100" name="sendemail" type="submit"><i class="fa-solid fa-qrcode"></i> Envío Código QR</button>
+				</div>
+                <input type="hidden" id="successMessage" th:value="${successMessage}">
+                <input type="hidden" id="errorMessage" th:value="${errorMessage}">	
+			</form>
+			<form th:action="@{/logout}" method="GET" class="row" style="height: 50px">
+				<div class="col-12">
+					<button class="btn btn-warning w-100" name="logout" type="submit"><i class="fa-solid fa-door-closed"></i> Salir</button>
+				</div>
+			</form>
+		</div>			
+	</div>            
+</div>
+</body>
+<script type="text/javascript">
+const successMessage = $("#successMessage").val();
+const errorMessage = $("#errorMessage").val();
+if(successMessage){
+	swal("Éxito", successMessage, "success");
+}
+if(errorMessage){
+	swal("Error", errorMessage, "error");
+}
+</script>
+</html>
